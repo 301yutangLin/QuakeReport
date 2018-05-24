@@ -17,6 +17,8 @@ import java.util.List;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
 
+    private static final String LOCATION_SEPARATOR = " of ";
+
     /**
      * EarthquakeAdapter Constructor
      * @param context of the app
@@ -45,10 +47,26 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         //Display the magnitude of the current earthquake in that TextView
         magnitudeView.setText(currentEarthquake.getmMagnitude());
 
-        //Find the TextView of ID location
-        TextView locationView = (TextView)listItemView.findViewById(R.id.location);
-        //Display the location of the current earthquake in that TextView
-        locationView.setText(currentEarthquake.getmLocation());
+        //Get the original format of location
+        String originalLocation = currentEarthquake.getmLocation();
+        String primaryLocation;
+        String locationOffset;
+
+        if (originalLocation.contains(LOCATION_SEPARATOR)) {
+            String[] parts = originalLocation.split(LOCATION_SEPARATOR);
+            locationOffset = parts[0] + LOCATION_SEPARATOR;
+            primaryLocation = parts[1];
+        } else {
+            locationOffset = getContext().getString(R.string.near_the);
+            primaryLocation = originalLocation;
+        }
+        //Find the TextView of primary_location
+        TextView primaryLocationView = (TextView) listItemView.findViewById(R.id.primary_location);
+        primaryLocationView.setText(primaryLocation);
+        //Find the TextView of location_offset
+        TextView locationOffsetView = (TextView) listItemView.findViewById(R.id.location_offset);
+        locationOffsetView.setText(locationOffset);
+
 
         //convert the date in milliseconds into a Date object
         Date dateObject = new Date(currentEarthquake.getmTimeInMilliseconds());
