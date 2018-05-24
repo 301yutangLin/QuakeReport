@@ -9,18 +9,18 @@ public class Earthquake {
     /** Earthquake attributes*/
     private String mMagnitude;
     private String mLocation;
-    private String mDate;
+    private long mTimeInMilliseconds;
 
     /**
      * Earthquake Constructor
-     * @param mMagnitude is the magnitude of the earthquake
-     * @param mLocation is the location of the earthquake
-     * @param mDate is the date of the earthquake
+     * @param magnitude is the magnitude of the earthquake
+     * @param location is the location of the earthquake
+     * @param timeInMilliseconds is the date of the earthquake
      */
-    public Earthquake(String mMagnitude, String mLocation, String mDate) {
-        this.mMagnitude = mMagnitude;
-        this.mLocation = mLocation;
-        this.mDate = mDate;
+    public Earthquake(String magnitude, String location, long timeInMilliseconds) {
+        this.mMagnitude = magnitude;
+        this.mLocation = location;
+        this.mTimeInMilliseconds = timeInMilliseconds;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Earthquake {
     /**
      * @return the date of the earthquake
      */
-    public String getmDate() {
-        return mDate;
+    public long getmTimeInMilliseconds() {
+        return mTimeInMilliseconds;
     }
 }
